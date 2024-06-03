@@ -1,0 +1,18 @@
+export const spacing = {
+  space4xs: "2px",
+  space3xs: "4px",
+  space2xs: "8px",
+  spaceXs: "12px",
+  spaceSm: "16px",
+  spaceMd: "24px",
+  spaceLg: "32px",
+  spaceXl: "48px",
+  space2xl: "64px",
+  space3xl: "96px",
+  space4xl: "128px",
+  space5xl: "192px",
+  space6xl: "256px",
+  space7xl: "384px",
+  space8xl: "512px",
+  space9xl: "640px",
+};

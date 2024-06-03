@@ -1,0 +1,316 @@
+@colors-link-dark: hsl(218, 76%, 42%);
+@colors-link-default: hsl(218, 76%, 68%);
+@colors-greys-200: hsl(0, 0%, 83%);
+@colors-greys-400: hsl(0, 0%, 61%);
+@colors-greys-800: hsl(0, 0%, 17%);
+@colors-primary-40: hsl(257, 100%, 91%);
+@colors-primary-100: hsl(257, 100%, 80%);
+@colors-primary-130: hsl(257, 35%, 58%);
+@colors-primary-150: hsl(257, 25%, 44%);
+@colors-negative: #e85d75;
+
+@font-size-text-Sm: 0.833em;
+@font-size-text-Md: 1rem;
+@font-size-text-Xl: 1.44em;
+
+@spacing-space-2xs: 8px;
+@spacing-space-Xs: 12px;
+@spacing-space-Sm: 16px;
+@spacing-space-Md: 24px;
+@spacing-space-Lg: 32px;
+@spacing-space-7xl: 384px;
+
+@border-radius-small: 4px;
+
+.auth-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.passwordResetLink {
+  color: @colors-link-default;
+  text-decoration: none;
+  border-style: none;
+  background-color: transparent;
+  font-size: @font-size-text-Sm;
+
+  &:hover,
+  &:focus {
+    text-decoration: @colors-link-default wavy underline !important;
+  }
+}
+
+.auth-box-wrapper {
+  min-height: 100vh;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-box-message {
+  padding: 0 0 @spacing-space-2xs 0;
+
+  span {
+    // font-weight: 500;
+    font-size: @font-size-text-Xl;
+  }
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-2px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(4px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-8px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(8px, 0, 0);
+  }
+}
+
+.auth-box-root {
+  margin: @font-size-text-Md 0;
+  width: calc(@spacing-space-7xl - 2 * @spacing-space-Lg); //-2x padding
+  padding: @spacing-space-Lg;
+
+  // animation: shake 1s linear infinite;
+  animation: none;
+
+  border-style: solid;
+  border-width: 1px;
+  border-color: hsl(0, 0%, 70%);
+  border-radius: @border-radius-small;
+  box-shadow: hsl(0, 0%, 50%) 0 4px 10px 0,
+    @colors-primary-100 0px -0px 20px -6px;
+  background-color: white;
+}
+
+.auth-box-form {
+  background-color: white;
+
+  .row {
+    display: flex;
+    flex-direction: column;
+    padding: @spacing-space-Sm 0;
+
+    .eye-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      // font-size + padding top and bottom
+      height: calc(16px + 12px + 12px);
+      // make it square
+      width: calc(16px + 12px + 12px);
+      // - input height (font size + 2x padding) - 2x border
+      margin-top: calc(-@spacing-space-Xs - @spacing-space-Xs - 16px - 2px);
+      // 100% - svg width - space to right
+      margin-left: calc(100% - 24px - 24px);
+
+      cursor: pointer;
+    }
+
+    .password-row {
+      height: 16px + @spacing-space-Xs + @spacing-space-Xs;
+      margin-top: @spacing-space-2xs;
+    }
+
+    .labelRow {
+      display: flex;
+      justify-content: space-between;
+
+      a {
+        font-size: @font-size-text-Sm;
+        //text-decoration: none;
+
+        &:hover,
+        &:focus {
+          //color: @colors-link-dark;
+          text-decoration: red wavy underline;
+        }
+      }
+    }
+
+    label {
+      font-size: @font-size-text-Sm;
+      color: @colors-greys-800;
+    }
+
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: @spacing-space-Xs @font-size-text-Sm;
+      margin-top: @spacing-space-2xs;
+
+      font-size: @font-size-text-Md;
+
+      border-style: solid;
+      border-width: 1px;
+      border-radius: @border-radius-small;
+      border-color: @colors-greys-200;
+    }
+  }
+
+  .message {
+    display: flex;
+    align-items: center;
+
+    color: @colors-negative;
+
+    svg {
+      width: 18px;
+      height: 18px;
+      margin-right: @spacing-space-2xs;
+    }
+  }
+
+  .switch-mode-button {
+    cursor: pointer;
+  }
+
+  .signInButton {
+    width: 100%;
+    padding: @spacing-space-Xs @font-size-text-Sm;
+
+    cursor: pointer;
+    color: white;
+    font-size: @font-size-text-Md;
+    background-color: @colors-primary-150;
+    border-style: none;
+    border-radius: @border-radius-small;
+
+    &:hover,
+    &:focus {
+      color: white;
+      background-color: @colors-primary-130;
+    }
+  }
+}
+
+.sso-container {
+  display: flex;
+  flex-direction: column;
+
+  .text-row {
+    display: flex;
+    align-items: center;
+    padding: @spacing-space-Xs 0 calc(@spacing-space-Sm + @spacing-space-Xs) 0;
+  }
+
+  .line {
+    border-style: solid none none none;
+    border-color: @colors-primary-40;
+    border-width: 1px;
+    height: 1px;
+    width: 100%;
+  }
+
+  .text {
+    padding: 0 @font-size-text-Md;
+    white-space: nowrap;
+    color: @colors-greys-400;
+  }
+}
+
+.sso-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  //font-size: 16px !important;
+
+  button {
+    font-size: 1rem !important;
+  }
+
+  > * + * {
+    margin-top: @spacing-space-Md;
+  }
+
+  .googleButton,
+  .twitterButton {
+    width: 210px !important;
+
+    text-align: initial !important;
+    &:hover,
+    &:focus {
+      box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2),
+        0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
+    }
+  }
+}
+
+.twitter-button {
+  display: flex;
+  align-items: center;
+  padding: 0;
+
+  height: 50px;
+
+  border-style: none;
+  background-color: #1da1f2;
+  cursor: pointer;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+
+  img {
+    width: 36px;
+    height: 36px;
+    padding: 6px;
+  }
+
+  span {
+    margin: auto auto auto 0;
+
+    font-size: @font-size-text-Md;
+    //@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+    font-family: "Roboto", sans-serif;
+    color: white;
+  }
+}
+
+.switch-modes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: calc(@spacing-space-Sm + @spacing-space-Xs);
+
+  .spacer {
+    border-style: solid none none none;
+    border-color: @colors-primary-40;
+    border-width: 1px;
+    height: 1px;
+    width: 100%;
+  }
+
+  span {
+    padding-top: @spacing-space-Sm;
+
+    text-align: center;
+    font-size: @font-size-text-Md;
+  }
+
+  button {
+    color: @colors-primary-150;
+    background-color: transparent;
+    border-style: none;
+    font-size: @font-size-text-Md;
+  }
+}
