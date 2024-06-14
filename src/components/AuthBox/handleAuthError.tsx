@@ -16,11 +16,8 @@ export default function handleAuthError({
   const message  = error?.data?.message;
 
 console.log(error)
-console.log("line:13", error)
 
   if (!message) {
-    console.log("line:14", message);
-    
     if (error?.status === "FETCH_ERROR") {
         setMessage("Es konnte keine Verbindung zum Server hergestellt werden.");
       setShaking(true);

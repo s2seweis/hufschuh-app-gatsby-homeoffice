@@ -35,25 +35,19 @@ export default function AuthBoxComponent({ mode = "login" }) {
     password: "",
     confirmPassword: "",
   });
-  console.log("line:2.9", state);
   // copy of mode, initial value is the given paramter. User can switch it.
   const [modeInternal, setModeInternal] = useState(mode);
   // text strings for button texts etc
   const text = AuthBoxText(modeInternal);
-  console.log("line:3", text);
 
   const [login, { isLoading }] = useLoginMutation();
-  console.log("line:19", login);
   const [register, { isLoading: isLoadingRegister }] = useRegisterMutation();
-  console.log("line:20", register);
-  console.log("line:21", isLoading);
-  
+
   const dispatch = useDispatch();
 
   // validate password and request registration if they match
   async function requestRegistration(event) {
     if (!validatePassword()) {
-      console.log("line:4 here? " );
       setMessage(text.noMatch);
       setShaking(true);
       return;
@@ -61,12 +55,7 @@ export default function AuthBoxComponent({ mode = "login" }) {
 
     await register({ email: state.email, password: state.password }).then(
       (result) => {
-        console.log("line:5", result);
-        console.log("line:6", result.data);
-
-        // ### error:result.error, => cause the mess !
-
-        if (result) {
+        if (!result.data) {
           console.log(result)
           handleAuthError({
             error: result.error,
@@ -77,8 +66,6 @@ export default function AuthBoxComponent({ mode = "login" }) {
           return;
         }
         const { user, tokens } = result.data;
-        console.log("line:7", user);
-        console.log("line:8", tokens);
 
         dispatch(setCredentials({ user, tokens }));
       }
@@ -106,10 +93,12 @@ export default function AuthBoxComponent({ mode = "login" }) {
           return;
         }
 
-        const { user, tokens } = result.data;
+        const { user, tokens, horses } = result.data;
+        console.log("line:500", result);
+        console.log("line:501", result.data);
 
         await navigate(routes.splashscreen);
-        dispatch(setCredentials({ user, tokens }));
+        dispatch(setCredentials({ user, tokens, horses }));
       }
     );
   }

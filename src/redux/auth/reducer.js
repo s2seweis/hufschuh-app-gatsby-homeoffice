@@ -5,6 +5,9 @@ const initialState = {
 };
 
 export const auth = (state = initialState, action) => {
+  console.log("line:300", state);
+  console.log("line:301", action);
+  console.log("line:302", action.user);
   switch (action.type) {
     case SET_USER: {
       return Object.assign({}, state, {

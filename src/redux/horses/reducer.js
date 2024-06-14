@@ -35,6 +35,7 @@ export const completedInitialState = {
 };
 
 export const horses = (state = {}, action) => {
+  console.log("line:666", state);
   switch (action.type) {
     case SET_HORSES:
       return Object.assign({}, state, action.horses);

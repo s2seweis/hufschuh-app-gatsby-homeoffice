@@ -7,7 +7,7 @@ export default function IndexPage(props) {
 
   return (
     <AppLayout
-      title={"Deine Pferde"}
+      title={"Deine Pferde2"}
       showNavigation={false}
       location={props.location}
       overflowY={"hidden"}

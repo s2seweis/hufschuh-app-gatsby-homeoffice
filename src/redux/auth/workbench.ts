@@ -2,8 +2,15 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User } from "../types";
 import { pick } from "lodash";
 
+export type Horse = {
+  factFileGeneral: any;
+  factFileParticularities: any;
+  name: string;
+  profilePicture: string;
+  owner: string;
+};
+
 export type AuthState = {
-  // horses: any;
   user?: Partial<User>;
   tokens?: {
     access: {
@@ -15,12 +22,13 @@ export type AuthState = {
       expires: string;
     };
   };
+  horses?: Horse[];
 };
 
 const initialState: AuthState = {
   user: undefined,
   tokens: undefined,
-  // horses: [],
+  horses: [],
 };
 
 export const authSlice = createSlice({
@@ -28,23 +36,20 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setCredentials: (state, action: PayloadAction<AuthState>) => {
-      console.log("line:100", state);
-      console.log("line:101", action);
+      console.log("line:400", state);
+      console.log("line:401", action);
+      
       if (action.payload.user) {
         state.user = pick(action.payload.user, ["id", "role"]);
-        console.log("line:102", state.user);
       }
 
       if (action.payload.tokens) {
         state.tokens = action.payload.tokens;
-        console.log("line:103", state.tokens);
       }
 
-      // if (action.payload.tokens) {
-      //   state.horses = action.payload.horses;
-      //   console.log("line:104", state.horses);
-
-      // }
+      if (action.payload.horses) {
+        state.horses = action.payload.horses;
+      }
     },
   },
 });

@@ -21,11 +21,6 @@ export default function RegisterForm({
     }));
   }
 
-  console.log("line:9", requestRegistration);
-  console.log("line:10", message);
-  console.log("line:11", text);
-  console.log("line:12", state);
-
   const texts = AuthBoxText("register");
 
   function onSubmit(event) {
@@ -46,8 +41,6 @@ export default function RegisterForm({
       password: state.password,
       handleAuthError: handleAuthError,
     });
-    console.log("line:100", handleAuthError);
-    console.log("line:101", requestRegistration);
   }
 
   return (

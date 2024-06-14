@@ -18,8 +18,6 @@ import { baseApi } from "../redux/api/baseApi";
  * * * rejects with an error ({status, data}
  */
 export function register({ email, password, handleAuthError }) {
-  console.log("line:1000", email);
-  console.log("line:1000 - Test???");
   // Request API.
   // Add your own code here to customize or restrict how the public can auth new users.
   // return new Promise((resolve, reject) => {

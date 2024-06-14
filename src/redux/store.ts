@@ -66,41 +66,6 @@ const rootReducer = combineReducers({
   }),
 });
 
-// const appReducer = async (state: any, action: any) => {
-//   if (action.type === "RESET_STATE") {
-//     let persistor = persistStore(store);
-//     await persistor.purge();
-//     // return persistedReducer(undefined, action);
-//   }
-//
-//   return combineReducers({
-//     [baseApi.reducerPath]: baseApi.reducer,
-//     appState: appStateReducer,
-//     auth: ,
-//   });
-// };
-
-// const globalReducer = async (state: any, action: any) => {
-//   if (action.type === "RESET_STATE") {
-//     let persistor = persistStore(store);
-//     await persistor.purge();
-//     return persistedReducer(undefined, action);
-//   }
-//
-//   return rootReducer(state, action);
-// };
-
-// const persistedReducer = (state, action) =>
-//
-//     return  persistReducer(
-//     {
-//       key: "root",
-//       version: 1,
-//       storage: LocalStorage,
-//     },
-//
-//   );
-
 const store = configureStore({
   reducer: (state, action) => rootReducer(state, action),
   middleware: (getDefaultMiddleware) =>
