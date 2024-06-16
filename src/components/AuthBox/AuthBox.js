@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import SSOProvidersComponent from "./SSOProviders";
 import RegisterForm from "./RegisterForm";
 import AuthBoxText from "./AuthBoxText";
@@ -12,137 +11,75 @@ import { useDispatch } from "react-redux";
 import { navigate } from "gatsby";
 import routes from "../../constants/routes";
 import { sendEmailConfirmation } from "../../services/auth";
+import "./styles.css";
 
-/**
- *
- * @param mode - "register" or "signIn"
- * @returns {JSX.Element}
- * @constructor
- */
 export default function AuthBoxComponent({ mode = "login" }) {
-  require("./styles.css");
-
-  // error message, displayed below the password field
   const [message, setMessage] = useState("");
-  // optional: a button that is displayed in case of error
-  // gets set by HandleAuthError (i.e. resend confirmation mail)
   const [errorButton, setErrorButton] = useState();
-  // Auth box shakes when an error occurs
   const [shaking, setShaking] = useState(false);
-  // this holds the form fields
-  const [state, setState] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-  // copy of mode, initial value is the given paramter. User can switch it.
+  const [state, setState] = useState({ email: "", password: "", confirmPassword: "" });
   const [modeInternal, setModeInternal] = useState(mode);
-  // text strings for button texts etc
   const text = AuthBoxText(modeInternal);
 
-  const [login, { isLoading }] = useLoginMutation();
-  const [register, { isLoading: isLoadingRegister }] = useRegisterMutation();
+  const [login] = useLoginMutation();
+  const [register] = useRegisterMutation();
 
   const dispatch = useDispatch();
 
-  // validate password and request registration if they match
-  async function requestRegistration(event) {
+  const validatePassword = () => state.password === state.confirmPassword;
+
+  const requestRegistration = async () => {
     if (!validatePassword()) {
       setMessage(text.noMatch);
       setShaking(true);
       return;
     }
 
-    await register({ email: state.email, password: state.password }).then(
-      (result) => {
-        if (!result.data) {
-          console.log(result)
-          handleAuthError({
-            error: result.error,
-            setMessage,
-            setErrorButton,
-            setShaking,
-          });
-          return;
-        }
-        const { user, tokens } = result.data;
+    const result = await register({ email: state.email, password: state.password });
+    if (!result.data) {
+      handleAuthError({ error: result.error, setMessage, setErrorButton, setShaking });
+      return;
+    }
 
-        dispatch(setCredentials({ user, tokens }));
-      }
-    );
-  }
+    const { user, tokens } = result.data;
+    dispatch(setCredentials({ user, tokens }));
+  };
 
-  async function requestLogin(event) {
+  const requestLogin = async (event) => {
     event.preventDefault();
-
-    await login({ email: state.email, password: state.password }).then(
-      async (result) => {
-        if (result.error) {
-          console.log(result.error);
-          handleAuthError({
-            error: result.error,
-            setMessage: (message) => setMessage(message),
-            setShaking: (bool) => setShaking(bool),
-            setErrorButton: (button) => setErrorButton(button),
-            sendEmailConfirmation: () =>
-              sendEmailConfirmation({
-                email: state.email,
-              }),
-          });
-          setShaking(true);
-          return;
-        }
-
-        const { user, tokens, horses } = result.data;
-        console.log("line:500", result);
-        console.log("line:501", result.data);
-
-        await navigate(routes.splashscreen);
-        dispatch(setCredentials({ user, tokens, horses }));
-      }
-    );
-  }
-
-  /* checks if passwords match */
-  function validatePassword(event) {
-    // check before submit
-    if (!event) {
-      return state.password === state.confirmPassword;
+    const result = await login({ email: state.email, password: state.password });
+    if (result.error) {
+      handleAuthError({
+        error: result.error,
+        setMessage,
+        setShaking,
+        setErrorButton,
+        sendEmailConfirmation: () => sendEmailConfirmation({ email: state.email }),
+      });
+      setShaking(true);
+      return;
     }
 
-    // check during input
-    event.persist();
-    if (event.target.value !== state.password) {
-      setMessage(text.noMatch);
-      return false;
-    } else {
-      setMessage("");
-      return true;
-    }
-  }
+    const { user, tokens, horses } = result.data;
+    await navigate(routes.splashscreen);
+    dispatch(setCredentials({ user, tokens, horses }));
+  };
 
-  // stops shaking after 1000ms
   useEffect(() => {
-    window.setTimeout(() => {
-      setShaking(false);
-    }, 1000);
+    if (shaking) {
+      const timeout = setTimeout(() => setShaking(false), 1000);
+      return () => clearTimeout(timeout);
+    }
   }, [shaking]);
 
   return (
-    <div className={"auth-box-wrapper"}>
+    <div className="auth-box-wrapper">
       <AuthBackground />
-      <div
-        className={"auth-box-root"}
-        id={"signInBox"}
-        style={{
-          animation: shaking ? "shake 1s linear infinite" : "none",
-        }}
-      >
-        <div className={"auth-box-message"}>
-          <span>{text.authText} </span>
+      <div className={`auth-box-root ${shaking ? "shake" : ""}`}>
+        <div className="auth-box-message">
+          <span>{text.authText}</span>
         </div>
 
-        {/* display either register form or sign in form based on mode */}
         {modeInternal === "register" ? (
           <RegisterForm
             requestRegistration={requestRegistration}
@@ -150,12 +87,6 @@ export default function AuthBoxComponent({ mode = "login" }) {
             text={text}
             state={state}
             setState={setState}
-            validatePassword={validatePassword}
-            handleAuthError={(error) =>
-              handleAuthError(error, setMessage, setShaking)
-            }
-            setMessage={setMessage}
-            setShaking={setShaking}
           />
         ) : (
           <SignInForm
@@ -168,34 +99,21 @@ export default function AuthBoxComponent({ mode = "login" }) {
           />
         )}
 
-        {/* third party sign ins */}
-        <div className={"sso-container"}>
-          <div className={"text-row"}>
-            <div className={"line"} />
-            <span className={"text"}>{text.ssoText}</span>
-            <div className={"line"} />
+        <div className="sso-container">
+          <div className="text-row">
+            <div className="line" />
+            <span className="text">{text.ssoText}</span>
+            <div className="line" />
           </div>
-
-          <SSOProvidersComponent
-            twitterButtonText={text.twitterButton}
-            googleButtonText={text.googleButton}
-            signInWithGoogle={() => {}}
-          />
+          <SSOProvidersComponent />
         </div>
 
-        {/* switch mode (register vs log in */}
-        <div className={"switch-modes"}>
-          <div className={"spacer"} />
+        <div className="switch-modes">
           <span>
             {text.switchModes}
             <button
-              onClick={() => {
-                if (modeInternal === "register") setModeInternal("logIn");
-                else {
-                  setModeInternal("register");
-                }
-              }}
-              className={"switch-mode-button"}
+              onClick={() => setModeInternal(modeInternal === "register" ? "login" : "register")}
+              className="switch-mode-button"
             >
               {text.switchModesCTA}
             </button>
