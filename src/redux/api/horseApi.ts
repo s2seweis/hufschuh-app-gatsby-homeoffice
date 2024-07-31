@@ -14,8 +14,7 @@ export const horseApi = baseApi.injectEndpoints({
         return [{ type: "Horse", id: result?.id }];
       },
     }),
-    // ### - would like to use this route?
-    horses: builder.query<ListResultBase & { results: Horse[] }, string>({      
+    horses: builder.query<ListResultBase & { results: Horse[] }, string>({
       query: (userId) => {
         return {
           url: `/users/${userId}/horses`,

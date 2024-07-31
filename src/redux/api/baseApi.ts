@@ -12,8 +12,6 @@ const baseQuery = fetchBaseQuery({
 
     // @ts-ignore
     const token = getState().auth.tokens?.access?.token;
-    console.log("line:900", token);
-
     if (token) {
       headers.set("authorization", `Bearer ${token}`);
     }
@@ -60,10 +58,7 @@ const useBaseQueryWithReauth = async (
         result = await baseQuery(args, api, extraOptions);
       } else {
         api.dispatch({ type: "RESET_STATE" });
-        api.dispatch(setCredentials({
-          user: undefined, tokens: undefined,
-          // horses: []
-        }));
+        api.dispatch(setCredentials({ user: undefined, tokens: undefined }));
 
         // api.dispatch(loggedOut());
       }

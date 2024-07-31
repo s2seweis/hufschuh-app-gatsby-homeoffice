@@ -9,7 +9,7 @@ export default function IndexPage({ id, data, location }) {
 
   return (
     <AppLayout
-      title={"Deine Pferde1"}
+      title={"Deine Pferde"}
       showNavigation={false}
       location={location}
       overflowY={"hidden"}

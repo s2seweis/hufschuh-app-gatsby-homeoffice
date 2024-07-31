@@ -18,8 +18,6 @@ type HorseListProps = {
 };
 
 export default function HorseList({ horses, cms }: HorseListProps) {
-  // console.log("line:3", horses);
-  
   return (
     // @ts-ignore
     <HorseListWrapper>
@@ -69,7 +67,7 @@ export default function HorseList({ horses, cms }: HorseListProps) {
                       width={undefined}
                       height={undefined}
                     />
-                    Edit3
+                    Edit
                   </span>
                 </button>
               </li>
@@ -100,7 +98,7 @@ export default function HorseList({ horses, cms }: HorseListProps) {
           strokeLinecap={undefined}
           strokeLineJoin={undefined}
           strokeWidth={undefined}
-        />8
+        />
       </button>
     </HorseListWrapper>
   );

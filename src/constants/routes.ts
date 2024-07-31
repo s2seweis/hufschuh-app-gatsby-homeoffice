@@ -39,7 +39,6 @@ const routes = {
   factFileParticularities: (id: string) => `/pferde/${id}/besonderheiten`,
 
   about: "/ueber-uns",
-  callback: "auth/google/callback",
 
   /* API */
   api: {
@@ -56,13 +55,14 @@ const routes = {
       return `${apiBase}/horses/${id}`;
     },
     fileUpload: `${apiBase}/upload`,
-    // ### - Where it will Arrive?
+    // #O Auth
     // connectFacebook: `${apiBase}/connect/facebook`,
     // connectGoogle: `${apiBase}/connect/google`,
     connectFacebook: `${apiBase}/auth/facebook`,
+
     connectGoogle: `${apiBase}/auth/google`,
     connectGoogleCallback: `${apiBase}/auth/google/callback`,
-    // ###
+
     forgotPassword: `${apiBase}/auth/forgot-password`,
 
     usersMe: `${apiBase}/users/me`,

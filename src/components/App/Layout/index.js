@@ -30,9 +30,7 @@ function AppLayoutComponent({
   showGuideButton,
 }) {
   const authState = useSelector((state) => state.auth);
-  console.log("line:500", authState);
   const appState = useSelector((state) => state.appState);
-  console.log("line:600", appState);
 
   const { data: userData } = useGetUserQuery(authState.user?.id, {
     refetchOnMountOrArgChange: true,

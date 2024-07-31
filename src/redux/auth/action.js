@@ -14,7 +14,6 @@ export const USER_UPDATE_FAILED = "USER_UPDATE_FAILED";
  */
 
 export function setUser(user) {
-  console.log("line:200", user);
   return {
     type: SET_USER,
     user: user,
@@ -22,8 +21,6 @@ export function setUser(user) {
 }
 
 export function setUserData(user, userData) {
-  console.log("line:201", user);
-  console.log("line:202", userData);
   return {
     type: SET_USER_DATA,
     payload: { user, userData },

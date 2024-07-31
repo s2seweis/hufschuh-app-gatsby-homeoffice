@@ -23,7 +23,6 @@ export const REMOVE_IMAGES_BUT = "REMOVE_IMAGES_BUT";
 /* HELPERS */
 // fetches the pferde of a auth
 function fetchHorses() {
-  console.log("line:555 - test");
   const user = store.getState().auth.user;
 
   return axios.get(routes.api.horses, {
