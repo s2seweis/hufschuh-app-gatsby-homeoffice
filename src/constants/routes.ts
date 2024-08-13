@@ -55,13 +55,16 @@ const routes = {
       return `${apiBase}/horses/${id}`;
     },
     fileUpload: `${apiBase}/upload`,
-    // #O Auth
-    // connectFacebook: `${apiBase}/connect/facebook`,
-    // connectGoogle: `${apiBase}/connect/google`,
-    connectFacebook: `${apiBase}/auth/facebook`,
 
+    // #here
+    connectFacebook: `${apiBase}/auth/facebook`,
+    connectFacebookCallback: `${apiBase}/auth/facebook/callback`,
+    // #
+
+    // #works
     connectGoogle: `${apiBase}/auth/google`,
     connectGoogleCallback: `${apiBase}/auth/google/callback`,
+    // #
 
     forgotPassword: `${apiBase}/auth/forgot-password`,
 
