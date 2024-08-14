@@ -6,6 +6,7 @@ import queryString from 'query-string';
 import { navigate } from "gatsby";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../redux/auth/authSlice";
+import routes from "../constants/routes";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ export default function LoginPage() {
 
     // Dispatch the credentials to the Redux store if necessary
     if (user && tokens) {
+      navigate(routes.splashscreen);
       dispatch(setCredentials({ user, tokens }));
     }
 
