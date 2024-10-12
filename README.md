@@ -33,3 +33,7 @@ Run the development server and visit http://localhost:3000/v1/docs/
 - [React](https://reactjs.org/)
 - [Gatsby](https://www.gatsbyjs.com/)
 - [react-redux](https://react-redux.js.org/)
+
+User:
+weissenborn24seb@gmail.com  
+sQ!uKWmcbasti1
