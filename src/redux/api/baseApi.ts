@@ -5,7 +5,7 @@ import { Horse, User } from "../types";
 import { Mutex } from "async-mutex";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: `${process.env.API_HOST}/v1`,
+  baseUrl: `${process.env.GATSBY_API_HOST}/v1`,
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     headers.set("Access-Control-Allow-Credentials", "true");

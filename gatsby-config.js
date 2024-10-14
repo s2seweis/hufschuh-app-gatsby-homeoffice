@@ -3,8 +3,8 @@ require("dotenv").config({
 });
 
 const strapiConfig = {
-  apiURL: process.env.STRAPI_API_URL,
-  accessToken: process.env.STRAPI_TOKEN,
+  apiURL: process.env.GATSBY_STRAPI_API_URL,
+  accessToken: process.env.GATSBY_STRAPI_TOKEN,
   ccollectionTypes: [],
   singleTypes: [
     "listenansicht",
