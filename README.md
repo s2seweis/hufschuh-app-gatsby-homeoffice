@@ -35,5 +35,5 @@ Run the development server and visit http://localhost:3000/v1/docs/
 - [react-redux](https://react-redux.js.org/)
 
 User:
-weissenborn24seb@gmail.com  
-sQ!uKWmcbasti1
+weissenborn.sebastian@gmail.com  
+sQ!uKWmCbasti1
